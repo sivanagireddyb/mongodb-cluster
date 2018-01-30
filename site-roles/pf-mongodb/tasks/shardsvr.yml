@@ -1,0 +1,32 @@
+- name: Configuring mongos | copying config files
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/{{ item.dest }}"
+    mode: "0644"
+  with_items:
+    - { src: 'mongos.conf.j2', dest: 'mongos.conf' }
+
+- name: Configuring mongos as service | copying config files
+  template:
+    src: "{{ item.src }}"
+    dest: "/usr/lib/systemd/system/{{ item.dest }}"
+    mode: "0644"
+  with_items:
+    - { src: 'mongos.service.j2', dest: 'mongos.service' }
+
+- name: start service | mongos
+  systemd:
+    name: "{{ item }}"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  with_items:
+    - mongos
+
+- name: restart service | mongos
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - mongos
+

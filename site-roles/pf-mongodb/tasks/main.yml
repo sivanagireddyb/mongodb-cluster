@@ -1,0 +1,15 @@
+---
+# tasks file for truedeploy.mongodb
+- name: importing intsall.yml
+  import_tasks: install.yml
+
+- name: importing config.yml
+  import_tasks: config_server.yml 
+
+
+- name: importing config.yml
+  import_tasks: mongod_nodes_config.yml
+
+
+- name: importing config.yml
+  import_tasks: mongos.yml

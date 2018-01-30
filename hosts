@@ -1,0 +1,110 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+## [webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+## 192.168.1.110
+
+
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+[test]
+192.168.11.66
+[test:vars]
+ansible_connection=ssh
+ansible_user=root
+ansible_ssh_pass=default123
+ansible_become=true
+
+[mongodb]
+10.10.12.203
+[mongodb:vars]
+ansible_connection=ssh
+ansible_user=schalla
+ansible_ssh_pass=c'?;HUU-5<vA
+ansible_sudo_pass=c'?;HUU-5<vA
+
+[appservers]
+10.10.14.69
+10.10.14.119
+10.10.14.113
+10.10.14.139
+#10.10.14.46
+10.10.15.84
+
+[appservers:vars]
+ansible_connection=ssh
+ansible_user=schalla
+ansible_ssh_pass=c'?;HUU-5<vA
+ansible_sudo_pass=c'?;HUU-5<vA
+
+[webservers]
+#10.10.12.203
+#10.10.13.208
+#10.10.13.111
+#10.10.12.205
+10.10.15.205
+10.10.15.143
+
+[webservers:vars]
+ansible_connection=ssh
+ansible_user=schalla
+ansible_ssh_pass=c'?;HUU-5<vA
+ansible_sudo_pass=c'?;HUU-5<vA
+
+[allservers]
+10.10.14.69
+10.10.14.119
+10.10.14.113
+10.10.14.139
+10.10.14.46
+10.10.15.84
+10.10.12.203
+10.10.13.208
+10.10.13.111
+10.10.12.205
+10.10.15.205
+10.10.15.143
+10.10.14.69
+10.10.12.203
+10.10.14.119
+10.10.12.205
+10.10.13.208
+10.10.14.113
+10.10.14.139
+10.10.14.46
+10.10.15.84
+10.10.15.205
+10.10.15.143
+10.10.13.111
+10.10.15.140
+10.10.15.197
+10.10.11.64
+10.10.11.196
+
+[allservers:vars]
+ansible_connection=ssh
+ansible_user=schalla
+ansible_ssh_pass=c'?;HUU-5<vA
+ansible_sudo_pass=c'?;HUU-5<vA

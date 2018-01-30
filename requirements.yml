@@ -1,0 +1,8 @@
+---
+#downloading from local gitlab
+- src: http://gitlab.polyglot.in/siva/truedeploy-selinux.git
+  scm: git
+- src: http://gitlab.polyglot.in/siva/truedeploy-java.git 
+  scm: git
+- src: http://gitlab.polyglot.in/siva/truedeploy-sudouser.git 
+  scm: git

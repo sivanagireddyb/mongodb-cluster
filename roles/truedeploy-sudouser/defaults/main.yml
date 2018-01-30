@@ -1,0 +1,8 @@
+---
+# defaults file for truedeploy.sudouser
+user_name: abhishek
+group_name: wheel
+sudo_pass: default123
+ 
+
+

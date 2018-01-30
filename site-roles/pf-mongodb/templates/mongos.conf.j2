@@ -1,0 +1,47 @@
+# mongos.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: {{ mongod_log_path }}
+
+# Where and how to store data.
+#storage:
+#  dbPath: /var/lib/mongo1
+#  journal:
+#    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+
+# how the process runs
+processManagement:
+  fork: true  # fork and run in background
+  pidFilePath: {{ mongod_pid_path }}  # location of pidfile
+  timeZoneInfo: /usr/share/zoneinfo
+
+# network interfaces
+net:
+  port: {{ mongod_bind_port }}
+  bindIp: 127.0.0.1  # Listen to local interface only, comment to listen on all interfaces.
+
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+sharding:
+#   configDB: <string>
+  configDB: {{ mongodcfgsvr_replicaset_name }}/127.0.0.1:{{ bind_port_configsvr1 }},127.0.0.1:{{ bind_port_configsvr2 }},127.0.0.1:{{ bind_port_configsvr3 }}
+## Enterprise-Only Options
+
+#auditLog:
+
+#snmp:
+

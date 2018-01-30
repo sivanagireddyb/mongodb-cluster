@@ -1,0 +1,56 @@
+---
+- name: Configuring database directories | for mongod nodes
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_user }}"
+    mode: "0755"
+  with_items:
+    - "{{ mongod1_dbpath }}"
+    - "{{ mongod2_dbpath }}"
+    - "{{ mongod3_dbpath }}"
+
+- name: Configuring mongodb | copying config files
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/{{ item.dest }}"
+    mode: "0644"
+  with_items:
+    - { src: 'mongod1.conf.j2', dest: 'mongod1.conf' }
+    - { src: 'mongod2.conf.j2', dest: 'mongod2.conf' }
+    - { src: 'mongod3.conf.j2', dest: 'mongod3.conf' }
+    
+
+  
+- name: copying service files | to make it available for systemctl
+  template: 
+    src: "{{ item.src }}" 
+    dest: "/usr/lib/systemd/system/{{ item.dest }}"
+  with_items:
+    - { src: 'mongod1.service.j2', dest: 'mongod1.service' }
+    - { src: 'mongod2.service.j2', dest: 'mongod2.service' }
+    - { src: 'mongod3.service.j2', dest: 'mongod3.service' }
+  notify:
+    - start mongod
+    - restart mongod
+
+- name: start services | mongod 1&2&3
+  systemd:
+    name: "{{ item }}"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  with_items:
+    - mongod1
+    - mongod2
+    - mongod3
+
+- name: restart services | mongod 1&2&3
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - mongod1
+    - mongod2
+    - mongod3

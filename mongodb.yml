@@ -1,0 +1,12 @@
+---
+- hosts: test 
+  become: true
+  roles:
+    - truedeploy-selinux
+    - pf-mongodb 
+#  environment:
+#    http_proxy: http://192.168.11.1:3128
+#    https_proxy: http://192.168.11.1:3128
+
+
+

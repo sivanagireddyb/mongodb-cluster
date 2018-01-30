@@ -1,0 +1,9 @@
+---
+# vars file for truedeploy.java
+java_version: 8u161
+#java_url: http://download.oracle.com/otn-pub/java/jdk/{{ java_version }}-b12/e758a0de34e24606bca991d704f6dcbf/jdk-{{ java_version }}-linux-x64.tar.gz
+java_url: http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz 
+jre_home: /opt/jdk1.8.0_161
+java_oracle_jdk_install_path: /opt/jdk1.8.0_161
+java_home: /opt/jdk1.8.0_161
+

@@ -1,0 +1,58 @@
+---
+## defaults file for truedeploy.mongodb
+mongodb_package: mongodb-org
+mongodb_version: "3.6"
+
+####------config servers-------#######
+configsvr1_dbpath: /var/lib/mongocfg_metadata1
+configsvr2_dbpath: /var/lib/mongocfg_metadata2
+configsvr3_dbpath: /var/lib/mongocfg_metadata3
+
+configsvr1_logpath: /var/log/mongodb/mongocfg1
+configsvr2_logpath: /var/log/mongodb/mongocfg2
+configsvr3_logpath: /var/log/mongodb/mongocfg3
+
+
+configsvr1_pidpath: /var/run/mongodb/mongodcfg1.pid
+configsvr2_pidpath: /var/run/mongodb/mongodcfg2.pid
+configsvr3_pidpath: /var/run/mongodb/mongodcfg3.pid
+
+bind_port_configsvr1: 27049 
+bind_port_configsvr2: 27059
+bind_port_configsvr3: 27069
+
+mongodcfgsvr1_conf_path: /etc/mongodcfgsvr1.conf
+mongodcfgsvr2_conf_path: /etc/mongodcfgsvr2.conf
+mongodcfgsvr3_conf_path: /etc/mongodcfgsvr3.conf
+
+mongodcfgsvr_replicaset_name: CF_Mongo
+
+
+########-----for mongod nodes-------#########
+mongodb_user: mongod
+mongod_replicaset_name: PF_Mongo 
+shardsvr_name: shardsvr
+mongod1_conf_path: /etc/mongod1.conf
+mongod2_conf_path: /etc/mongod2.conf
+mongod3_conf_path: /etc/mongod3.conf
+
+mongod1_logpath: /var/log/mongodb/mongod1.log
+mongod1_pidpath: /var/run/mongodb/mongod1.pid
+mongod1_dbpath: /var/lib/mongo1
+bind_port_mongod1: 27021
+
+mongod2_logpath: /var/log/mongodb/mongod2.log
+mongod2_pidpath: /var/run/mongodb/mongod2.pid
+mongod2_dbpath: /var/lib/mongo2
+bind_port_mongod2: 27022
+
+mongod3_logpath: /var/log/mongodb/mongod3.log
+mongod3_pidpath: /var/run/mongodb/mongod3.pid
+mongod3_dbpath: /var/lib/mongo3
+bind_port_mongod3: 27023
+
+##########-------mongos-----------######
+mongos_config_path: /etc/mongos.conf
+mongod_log_path: /var/log/mongodb/mongos.log
+mongod_pid_path: /var/run/mongodb/mongods.pid 
+mongod_bind_port: 27031

@@ -1,0 +1,45 @@
+---
+# handlers file for truedeploy.mongodb
+- name: start cfgsvr
+  systemd:
+    name: "{{ item }}"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  with_items:
+    - mongodcfgsvr1.service
+    - mongodcfgsvr2.service
+    - mongodcfgsvr3.service
+
+- name: restart cfgsvr 
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    enabled: yes
+  with_items:
+    - mongodcfgsvr1.service
+    - mongodcfgsvr2.service
+    - mongodcfgsvr3.service
+
+
+- name: start mongod
+  systemd:
+    name: "{{ item }}"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  with_items:
+    - mongod1
+    - mongod2
+    - mongod3
+
+- name: restart mongod 
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - mongod1
+    - mongod2
+    - mongod3
+
+

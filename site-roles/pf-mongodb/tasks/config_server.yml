@@ -1,0 +1,54 @@
+---
+- name: Configuring database directories | for config servers
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_user }}"
+    mode: "0755"
+  with_items:
+    - "{{ configsvr1_dbpath }}"
+    - "{{ configsvr2_dbpath }}"
+    - "{{ configsvr3_dbpath }}"
+
+- name: Configuring mongodb | copying config files
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/{{ item.dest }}"
+    mode: "0644"
+  with_items:
+    - { src: 'mongodcfgsvr1.conf.j2', dest: 'mongodcfgsvr1.conf' }
+    - { src: 'mongodcfgsvr2.conf.j2', dest: 'mongodcfgsvr2.conf' }
+    - { src: 'mongodcfgsvr3.conf.j2', dest: 'mongodcfgsvr3.conf' }
+
+
+
+- name: copying service files | to make it available for systemctl
+  template:
+    src: "{{ item.src }}"
+    dest: "/usr/lib/systemd/system/{{ item.dest }}"
+  with_items:
+    - { src: 'mongodcfgsvr1.service.j2', dest: 'mongodcfgsvr1.service' }
+    - { src: 'mongodcfgsvr2.service.j2', dest: 'mongodcfgsvr2.service' }
+    - { src: 'mongodcfgsvr3.service.j2', dest: 'mongodcfgsvr3.service' }
+
+- name: start services | mongod 1&2&3
+  systemd:
+    name: "{{ item }}"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  with_items:
+    - mongodcfgsvr1 
+    - mongodcfgsvr2
+    - mongodcfgsvr3
+
+- name: restart services | mongod 1&2&3
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - mongodcfgsvr1
+    - mongodcfgsvr2
+    - mongodcfgsvr3
+

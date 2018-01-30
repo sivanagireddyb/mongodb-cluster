@@ -1,0 +1,24 @@
+---
+
+#- hosts: webservers
+#  become: true
+#  tasks:
+#  - file: 
+#      path: /opt/jdk-9.0.4_linux-x64_bin.tar.gz
+#      state: absent
+#
+#  - file: 
+#      path: /opt/jdk-9.0.4
+#      state: absent
+
+
+
+- hosts: webservers
+  become: true
+  roles:
+    - truedeploy-java
+   
+  
+
+
+
